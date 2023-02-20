@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Хорев Кирилл](https://up.htmlacademy.ru/javascript/28/user/1315903).
-* Наставник: [Roman Zheltov] (https://htmlacademy.ru/profile/id1145037).
+* Наставник: [Roman Zheltov](https://htmlacademy.ru/profile/id1145037).
 
 ---
 
