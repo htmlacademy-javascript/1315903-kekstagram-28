@@ -33,50 +33,62 @@ const MESSAGES = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
 
-const LIST_NUMBERS_PHOTOS = [];
-const LIST_IDS = [];
-const ID_COMMENTS = [];
-
-const getRandomInteger = (a, b) => {
-  const lower = Math.ceil(Math.min(a, b));
-  const upper = Math.floor(Math.max(a, b));
+const getRandomInteger = (min, max) => {
+  const lower = Math.ceil(Math.min(min, max));
+  const upper = Math.floor(Math.max(min, max));
   const result = Math.random() * (upper - lower + 1) + lower;
   return Math.floor(result);
 };
 
-const generateUniqValue = (arr, minElements, maxElements) => {
-  let value = getRandomInteger(minElements,maxElements);
-  if (arr.length >= maxElements) {
-    return null;
-  }
-  while (arr.includes(value)) {
-    value = getRandomInteger(minElements,maxElements);
-  }
-  arr.push(value);
-  return value;
+const generateUniqValue = (minElements,maxElements) => {
+  const arr = [];
+  return function getValue() {
+    let value = getRandomInteger(minElements,maxElements);
+    if (arr.length >= maxElements) {
+      return null;
+    }
+    while (arr.includes(value)) {
+      value = getRandomInteger(minElements,maxElements);
+    }
+    arr.push(value);
+    return value;
+  };
 };
 
 const generateUrl = () => {
-  const idPhotoUrl = generateUniqValue(LIST_NUMBERS_PHOTOS,1,NUMBER_OF_PHOTOS);
+  const uniqValue = generateUniqValue(1,NUMBER_OF_PHOTOS);
+  const idPhotoUrl = uniqValue();
   return `photos/${idPhotoUrl}.jpg`;
 };
 
-const getAvatar = () => (`img/avatar-${getRandomInteger(15,250)}.svg`);
+const getAvatar = () => {
+  const uniqValue = generateUniqValue(MIN_LIKES,MAX_LIKES);
+  return `img/avatar-${uniqValue()}.svg`;
+};
 
-const createComment = () => ({
-  id: generateUniqValue(ID_COMMENTS,1,10000),
-  avatar: getAvatar(),
-  message: MESSAGES[getRandomInteger(1,MESSAGES.length - 1)],
-  name: NAMES[getRandomInteger(1,NAMES.length - 1)]
-});
+const getRandomMessages = () => MESSAGES[getRandomInteger(1,MESSAGES.length - 1)];
+const createMessage = () => Array.from({length: getRandomInteger(1,2)}, getRandomMessages).join(' ');
 
-const createObject = () => ({
-  id: generateUniqValue(LIST_IDS,1,NUMBER_OF_PHOTOS),
-  url: generateUrl(),
-  description: DESCRIPTIONS[getRandomInteger(1,DESCRIPTIONS.length - 1)],
-  likes: getRandomInteger(MIN_LIKES,MAX_LIKES),
-  comments: Array.from({length: 2}, createComment)
-});
+const createComment = () => {
+  const uniqValue = generateUniqValue(1,10000);
+  return {
+    id: uniqValue(),
+    avatar: getAvatar(),
+    message: createMessage(),
+    name: NAMES[getRandomInteger(1,NAMES.length - 1)]
+  };
+};
+
+const createObject = () => {
+  const uniqValue = generateUniqValue(1,NUMBER_OF_PHOTOS);
+  return {
+    id: uniqValue(),
+    url: generateUrl(),
+    description: DESCRIPTIONS[getRandomInteger(1,DESCRIPTIONS.length - 1)],
+    likes: getRandomInteger(MIN_LIKES,MAX_LIKES),
+    comments: Array.from({length: 2}, createComment)
+  };
+};
 
 const generateObjectsArray = () => (Array.from({length: NUMBER_OF_PHOTOS}, createObject));
 
