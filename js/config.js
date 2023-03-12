@@ -1,6 +1,7 @@
 const NUMBER_OF_PHOTOS = 25;
 const MIN_LIKES = 15;
 const MAX_LIKES = 250;
+const NUMBER_OF_COMMENTS = 100;
 const DESCRIPTIONS = [
   'На фото запечатлен потрясающий вид с воздуха на нашу планету из космоса.',
   'Искривление Земли заметно, на изображении преобладают оттенки синего, зеленого и коричневого.',
@@ -33,4 +34,4 @@ const MESSAGES = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
 
-export {NUMBER_OF_PHOTOS,MIN_LIKES,MAX_LIKES,DESCRIPTIONS,NAMES,MESSAGES};
+export {NUMBER_OF_PHOTOS,MIN_LIKES,MAX_LIKES,DESCRIPTIONS,NAMES,MESSAGES, NUMBER_OF_COMMENTS};

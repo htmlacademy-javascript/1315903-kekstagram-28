@@ -1,5 +1,5 @@
 import {getRandomInteger,generateUniqValue} from './util.js';
-import {NUMBER_OF_PHOTOS,MIN_LIKES,MAX_LIKES,DESCRIPTIONS,NAMES,MESSAGES} from './config.js';
+import {NUMBER_OF_PHOTOS,MIN_LIKES,MAX_LIKES,DESCRIPTIONS,NAMES,MESSAGES,NUMBER_OF_COMMENTS} from './config.js';
 
 const generateUrl = () => {
   const uniqValue = generateUniqValue(1,NUMBER_OF_PHOTOS);
@@ -8,7 +8,7 @@ const generateUrl = () => {
 };
 
 const getAvatar = () => {
-  const uniqValue = generateUniqValue(MIN_LIKES,MAX_LIKES);
+  const uniqValue = generateUniqValue(1,6);
   return `img/avatar-${uniqValue()}.svg`;
 };
 
@@ -32,10 +32,10 @@ const createObject = () => {
     url: generateUrl(),
     description: DESCRIPTIONS[getRandomInteger(1,DESCRIPTIONS.length - 1)],
     likes: getRandomInteger(MIN_LIKES,MAX_LIKES),
-    comments: Array.from({length: 2}, createComment)
+    comments: Array.from({length: getRandomInteger(1,NUMBER_OF_COMMENTS)}, createComment)
   };
 };
 
-const generateObjectsArray = () => (Array.from({length: NUMBER_OF_PHOTOS}, createObject));
+const generateData = () => (Array.from({length: NUMBER_OF_PHOTOS}, createObject));
 
-export {generateObjectsArray};
+export {generateData};
