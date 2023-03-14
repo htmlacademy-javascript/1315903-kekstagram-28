@@ -1,5 +1,10 @@
 import {createCommentItem} from './comment-layout.js';
 
+const openModal = () => {
+  document.querySelector('.big-picture').classList.add('hidden');
+  document.querySelector('body').classList.remove('modal-open');
+};
+
 const openFullImage = (item, data) => {
   item.addEventListener('click', (evt) => {
     evt.preventDefault();
@@ -20,14 +25,12 @@ const closeFullImage = () => {
   const closeButton = document.querySelector('.big-picture__cancel');
   window.addEventListener('keydown', (evt) => {
     if (evt.key === 'Escape') {
-      document.querySelector('.big-picture').classList.add('hidden');
-      document.querySelector('body').classList.remove('modal-open');
+      openModal();
     }
   });
   closeButton.addEventListener('click', (evt) => {
     evt.preventDefault();
-    document.querySelector('.big-picture').classList.add('hidden');
-    document.querySelector('body').classList.remove('modal-open');
+    openModal();
   });
 };
 
