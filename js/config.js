@@ -1,7 +1,7 @@
 const NUMBER_OF_PHOTOS = 25;
 const MIN_LIKES = 15;
 const MAX_LIKES = 250;
-const NUMBER_OF_COMMENTS = 100;
+const NUMBER_OF_COMMENTS = 15;
 const DESCRIPTIONS = [
   'На фото запечатлен потрясающий вид с воздуха на нашу планету из космоса.',
   'Искривление Земли заметно, на изображении преобладают оттенки синего, зеленого и коричневого.',
