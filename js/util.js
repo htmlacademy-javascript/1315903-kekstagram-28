@@ -20,4 +20,10 @@ const generateUniqValue = (minElements,maxElements) => {
   };
 };
 
-export {getRandomInteger,generateUniqValue};
+const getObjectMetadata = (data,id) => {
+  const item = data.find((el) => el.id === id);
+  return item;
+};
+
+export {getRandomInteger,generateUniqValue,getObjectMetadata};
+
