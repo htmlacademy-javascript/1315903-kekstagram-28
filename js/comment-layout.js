@@ -19,10 +19,16 @@ const createCommentItem = (data) => {
   const commentFragment = document.createDocumentFragment();
   const commentItem = document.createElement('li');
   commentItem.classList.add('social__comment');
+  commentItem.classList.add('hidden');
   commentItem.appendChild(createSocialPictureLayout(data));
   commentItem.appendChild(createTextCommentLayout(data));
   commentFragment.appendChild(commentItem);
   return commentFragment;
 };
 
-export {createCommentItem};
+const calcHiddenComments = (commentsList) => {
+  const currentHiddenComments = commentsList.querySelectorAll('.hidden');
+  return currentHiddenComments;
+};
+
+export { createCommentItem, calcHiddenComments };
