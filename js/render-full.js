@@ -32,7 +32,6 @@ const createCommentCounterElement = () => {
 };
 
 const showFiveComments = (hiddenComments, buttonMoreComments) => {
-
   hiddenComments.forEach((comment,index) => {
     if ((index <= COUNT_COMMENTS - 1) && (hiddenComments.length > COUNT_COMMENTS)) {
       if (buttonMoreComments.classList.contains('hidden')) {
@@ -45,10 +44,10 @@ const showFiveComments = (hiddenComments, buttonMoreComments) => {
     }
   });
   const commentCounterElement = document.querySelector('.big-picture .comments-count');
-  commentCounterElement.textContent = `${calcShowComments(commentsList)} из ${calcAllComments()} комментариев`;
+  commentCounterElement.innerHTML = `${calcShowComments(commentsList)} из <span class="comments-count">${calcAllComments()}</span> комментариев`;
 };
 
-const fixedBackPage = () => document.querySelector('body').classList.add('modal-open');
+const fixBackPage = () => document.querySelector('body').classList.add('modal-open');
 
 const renderPopup = (data) => {
   document.querySelector('.big-picture').classList.remove('hidden');
@@ -92,7 +91,7 @@ function closePopup () {
 }
 
 const openFullImage = (data) => {
-  fixedBackPage();
+  fixBackPage();
   renderPopup(data);
   clearExistsСounterComments();
   createCommentCounterElement();
