@@ -1,7 +1,7 @@
 const NUMBER_OF_PHOTOS = 25;
 const MIN_LIKES = 15;
 const MAX_LIKES = 250;
-const NUMBER_OF_COMMENTS = 15;
+const NUMBER_OF_COMMENTS = 20;
 const DESCRIPTIONS = [
   'На фото запечатлен потрясающий вид с воздуха на нашу планету из космоса.',
   'Искривление Земли заметно, на изображении преобладают оттенки синего, зеленого и коричневого.',
@@ -33,5 +33,6 @@ const MESSAGES = [
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
+const COUNT_COMMENTS = 5;
 
-export {NUMBER_OF_PHOTOS,MIN_LIKES,MAX_LIKES,DESCRIPTIONS,NAMES,MESSAGES, NUMBER_OF_COMMENTS};
+export {NUMBER_OF_PHOTOS,MIN_LIKES,MAX_LIKES,DESCRIPTIONS,NAMES,MESSAGES, NUMBER_OF_COMMENTS, COUNT_COMMENTS};

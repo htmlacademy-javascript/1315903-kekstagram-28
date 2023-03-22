@@ -9,7 +9,7 @@ const getThumbnailsFragment = (template, data) => {
   const pictureListFragment = document.createDocumentFragment();
   data.forEach((element) => {
     const picture = template.cloneNode(true);
-    picture.setAttribute('data-id', element.id);
+    picture.dataset.id = element.id;
     picture.querySelector('.picture__img').setAttribute('src', element.url);
     picture.querySelector('.picture__likes').textContent = element.likes;
     picture.querySelector('.picture__comments').textContent = element.comments.length;
@@ -21,7 +21,11 @@ const getThumbnailsFragment = (template, data) => {
 const renderThumbnails = () => pictures.appendChild(getThumbnailsFragment(pictureTemplate,dataArray));
 
 const openPopup = (evt) => {
-  const idClickedImage = Number(evt.target.closest('.picture').dataset.id);
+  const thumbnail = evt.target.closest('[data-id]');
+  if (!thumbnail) {
+    return;
+  }
+  const idClickedImage = Number(thumbnail.dataset.id);
   const dataClickedImage = getObjectMetadata(dataArray,idClickedImage);
   return openFullImage(dataClickedImage);
 };

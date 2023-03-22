@@ -1,34 +1,17 @@
-import { createCommentItem } from './comment-layout.js';
+import { clearExistsСounterComments, createCommentCounterElement, clearExistsComments, renderComments, onClickMoreCommentsButton, buttonLoadMore } from './comment-layout.js';
 
-const closeButton = document.querySelector('.big-picture__cancel');
+const buttonClose = document.querySelector('.big-picture__cancel');
 
-const clearExistsComments = () => {
-  document.querySelector('.social__comments').innerHTML = '';
-};
-
-const hiddenCommentCout = () => {
-  document.querySelector('.social__comment-count').classList.add('hidden');
-};
-
-const hiddenCommentsLoader = () => {
-  document.querySelector('.comments-loader').classList.add('hidden');
-};
-
-const fixedBackPage = () => document.querySelector('body').classList.add('modal-open');
+const fixBackPage = () => document.querySelector('body').classList.add('modal-open');
 
 const renderPopup = (data) => {
   document.querySelector('.big-picture').classList.remove('hidden');
   document.querySelector('.big-picture .big-picture__img img').setAttribute('src', data.url);
   document.querySelector('.big-picture .likes-count').textContent = data.likes;
-  document.querySelector('.big-picture .comments-count').textContent = data.comments.length;
   document.querySelector('.big-picture .social__caption').textContent = data.description;
 };
 
-const renderComments = (data) => {
-  data.comments
-    .forEach((comment) => document.querySelector('.social__comments').appendChild(createCommentItem(comment)));
-};
-
+buttonLoadMore.addEventListener('click', onClickMoreCommentsButton);
 
 const onDocumentKeydown = (evt) => {
   if (evt.key === 'Escape') {
@@ -37,7 +20,7 @@ const onDocumentKeydown = (evt) => {
   }
 };
 
-const onClickCloseButton = (evt) => {
+const onClickButtonClose = (evt) => {
   evt.preventDefault();
   closePopup();
 };
@@ -45,19 +28,19 @@ const onClickCloseButton = (evt) => {
 function closePopup () {
   document.querySelector('.big-picture').classList.add('hidden');
   document.querySelector('body').classList.remove('modal-open');
-  closeButton.removeEventListener('click', onClickCloseButton);
+  buttonClose.removeEventListener('click', onClickButtonClose);
   document.removeEventListener('keydown', onDocumentKeydown);
 }
 
 const openFullImage = (data) => {
-  fixedBackPage();
-  hiddenCommentCout();
-  hiddenCommentsLoader();
+  fixBackPage();
   renderPopup(data);
+  clearExistsСounterComments();
+  createCommentCounterElement();
   clearExistsComments();
   renderComments(data);
   document.addEventListener('keydown', onDocumentKeydown);
-  closeButton.addEventListener('click', onClickCloseButton);
+  buttonClose.addEventListener('click', onClickButtonClose);
 };
 
 export {openFullImage};
