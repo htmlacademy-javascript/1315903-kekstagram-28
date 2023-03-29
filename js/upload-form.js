@@ -1,4 +1,5 @@
 import { isEscape, findDublicateItems } from './util.js';
+import './scale.js';
 
 const uploadForm = document.querySelector('.img-upload__form');
 const uploadFile = document.querySelector('#upload-file');
