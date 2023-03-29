@@ -25,5 +25,17 @@ const getObjectMetadata = (data,id) => {
   return item;
 };
 
-export {getRandomInteger,generateUniqValue,getObjectMetadata};
+const findDublicateItems = (arr) => {
+  const sortArray = Array.from(arr).sort();
+  for (let i = 0; i <= sortArray.length - 2; i++) {
+    if (sortArray[i] === sortArray[i + 1]) {
+      return true;
+    }
+  }
+  return false;
+};
+
+const isEscape = (evt) => evt.key === 'Escape';
+
+export {getRandomInteger,generateUniqValue,getObjectMetadata,isEscape,findDublicateItems};
 
