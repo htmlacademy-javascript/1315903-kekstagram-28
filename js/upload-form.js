@@ -1,5 +1,6 @@
 import { isEscape, findDublicateItems } from './util.js';
-import './scale.js';
+import { lessScale, moreScale, onClickZoomInButton, onClickZoomOutButton } from './scale.js';
+import { onClickFilter, effectList } from './filters.js';
 
 const uploadForm = document.querySelector('.img-upload__form');
 const uploadFile = document.querySelector('#upload-file');
@@ -7,6 +8,7 @@ const uploadModalWindow = document.querySelector('.img-upload__overlay');
 const buttonCancelUpload = document.querySelector('#upload-cancel');
 const hashtag = uploadModalWindow.querySelector('.text__hashtags');
 const textDescription = uploadModalWindow.querySelector('.text__description');
+const imagePreview = document.querySelector('.img-upload__preview').firstElementChild;
 
 
 const getMessage = (type) => {
@@ -42,16 +44,37 @@ const removeSuccessMessage = () => {
   }
 };
 
+
+const onClickRemoveErrorMessage = () => {
+  if (isShowError) {
+    removeErrorMessage();
+  }
+};
+
+const onClickRemoveSuccessMessage = () => {
+  if (isShowSuccess) {
+    removeSuccessMessage();
+  }
+};
+
 const onChangeForm = () => {
   uploadModalWindow.classList.remove('hidden');
   document.body.classList.add('modal-open');
 };
+
+document.addEventListener('click', onClickRemoveErrorMessage);
+document.addEventListener('click', onClickRemoveSuccessMessage);
 
 const onClickButtonCancel = () => {
   uploadModalWindow.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onClickButtonCancel);
   document.removeEventListener('click', onClickButtonCancel);
+  moreScale.removeEventListener('click', onClickZoomInButton);
+  lessScale.removeEventListener('click', onClickZoomOutButton);
+  effectList.removeEventListener('click', onClickFilter);
+  document.removeEventListener('click', onClickRemoveErrorMessage);
+  document.removeEventListener('click', onClickRemoveSuccessMessage);
   uploadFile.value = '';
 };
 
@@ -105,14 +128,4 @@ uploadForm.addEventListener('submit', (evt) => {
   }
 });
 
-document.addEventListener('click', () => {
-  if (isShowError) {
-    removeErrorMessage();
-  }
-});
-
-document.addEventListener('click', () => {
-  if (isShowSuccess) {
-    removeSuccessMessage();
-  }
-});
+export { imagePreview };
