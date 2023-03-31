@@ -18,7 +18,6 @@ const onClickZoomOutButton = () => {
   if (newValue <= 25) {
     valueScale.value = '25%';
     imagePreview.style.transform = 'scale(0.25)';
-
   } else {
     valueScale.value = `${String(newValue)}%`;
     imagePreview.style.transform = `scale(${newValue / 100})`;
