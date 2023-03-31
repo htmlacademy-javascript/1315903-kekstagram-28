@@ -60,10 +60,9 @@ const onClickRemoveSuccessMessage = () => {
 const onChangeForm = () => {
   uploadModalWindow.classList.remove('hidden');
   document.body.classList.add('modal-open');
+  document.addEventListener('click', onClickRemoveErrorMessage);
+  document.addEventListener('click', onClickRemoveSuccessMessage);
 };
-
-document.addEventListener('click', onClickRemoveErrorMessage);
-document.addEventListener('click', onClickRemoveSuccessMessage);
 
 const onClickButtonCancel = () => {
   uploadModalWindow.classList.add('hidden');
